@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100&family=Poppins:ital,wght@0,200;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <title>ADMIN PANEL</title>
+    <!-- <script src="/index.js" defer></script> -->
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <ul class="menu">
+            <div class="logo">
+                <img src="img/1498179961-buta.png" alt="">
+            </div>
+            <li>
+                <a href="kaizen.html">
+                    <span class="link-name">Kaizen</span>
+                </a>
+            </li>
+            <li>
+                <a href="1is.html">
+
+                    <span class="link-name">1iş</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="butagroup.html">
+
+                    <span class="link-name">Buta Group</span>
+                </a>
+            </li>
+
+        </ul>
+
+
+
+
+
+    </nav>
+
+    <div class="container">
+        <h1>Statistics</h1>
+        <h2>Kaizen</h2>
+        <div class="statistics">
+
+            <div class="card">
+                <div class="social_media">
+                    <img src="img/Instagram_logo_2022.svg.webp" alt="">
+
+                    Instagram
+                </div>
+                <div class="card-item">
+                    <div class="title">
+                        User name
+                    </div>
+                    <div class="value" id="pagenameInsta">
+
+                    </div>
+                </div>
+
+                <div class="card-item">
+                    <div class="title">
+                        Followers
+                    </div>
+                    <div class="value" id="followersInsta">
+
+                    </div>
+
+
+
+                </div>
+                <div class="progress-bar-instagram">
+                    <div class="progress-instagram">
+                        <div class="percentage-instagram">0%</div>
+                    </div>
+                    <div id="count">
+
+                    </div>
+                </div>
+
+                <div class="targ">
+                 
+                        <h4>
+                            Baslangic: 2000
+                        </h4>
+                        <h4>Hedef: 3000</h4>
+                 
+                  
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="social_media">
+                    <img src="img/Facebook_Logo_(2019).png.webp" alt="">
+                    Facebook
+                </div>
+                <div class="card-item">
+                    <div class="title">
+                        User name
+                    </div>
+                    <div class="value" id="pagename">
+
+
+                    </div>
+                </div>
+
+                <div class="card-item">
+                    <div class="title">
+                        Followers
+                    </div>
+                    <div class="value" id="like">
+
+
+                    </div>
+                </div>
+
+                <div class="progress-bar-facebook">
+                    <div class="progress-facebook">
+                        <div class="percentage-facebook">0%</div>
+                    </div>
+                    <div id="count">
+
+                    </div>
+                </div>
+
+                <div class="targ">
+                 
+                    <h4>
+                        Baslangic: 200
+                    </h4>
+                    <h4>Hedef: 400</h4>
+             
+              
+            </div>
+
+            </div>
+<!-- 
+            <div class="card">
+                <div class="social_media">
+                    <img src="img/unnamed.png" alt="">
+
+                    Linkedin
+                </div>
+                <div class="card-item">
+                    <div class="title">
+                        User name
+                    </div>
+                    <div class="value" id="usernames">
+
+
+                    </div>
+                </div>
+
+                <div class="card-item">
+                    <div class="title">
+                        Followers
+                    </div>
+                    <div class="value" id="likes">
+
+
+                    </div>
+
+                </div>
+                <div class="progress-bar-linkedin">
+                    <div class="progress-linkedin">
+                        <div class="percentage-linkedin">0%</div>
+                    </div>
+                    <div id="count">
+
+                    </div>
+                </div>
+
+            </div> -->
+
+        </div>
+    </div>
+
+
+    <script>
+
+        /* Instagram  */
+
+const apiLink = 'https://api.apify.com/v2/datasets/MZxFcEnq0x2W5W6Wg/items?clean=true&fields=username,followersCount&format=json';
+        async function hesablaInsta() {
+            await fetch(apiLink, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById('pagenameInsta').innerHTML = data[0].username;
+
+
+                    document.getElementById('followersInsta').innerHTML = data[0].followersCount;
+
+                    console.log(data.followersCount);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
+        hesablaInsta()
+
+        var maxValueInsta =3000;
+        var beginInsta = 2000;
+
+        setTimeout(() => {
+            var percentage = (((Number(followersInsta.innerText) - beginInsta) / (maxValueInsta-beginInsta)) * 100).toFixed(2);
+            var progressElement = document.querySelector('.progress-instagram');
+            var percentageElement = document.querySelector('.percentage-instagram');
+            progressElement.style.width = `${percentage}%`;
+            percentageElement.innerText = `${percentage}%`;
+        }, 3000);
+
+    
+
+        /*Facebook*/
+
+
+        
+        const apiLinks = 'https://api.apify.com/v2/datasets/EpUBFu8fxyb6fBpdL/items?clean=true&fields=pageName,followers&format=json'; 
+        async function hesablaFb() {
+            await fetch(apiLinks, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById('pagename').innerHTML = data[0].pageName;
+
+
+                    document.getElementById('like').innerHTML = data[0].followers;
+
+                    console.log(data.followers);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
+        hesablaFb()
+
+        var maxValueFb = 400;
+        var beginFb = 200;
+
+        setTimeout(() => {
+            var percentage = (((Number(like.innerText) - beginFb) / (maxValueFb-beginFb)) * 100).toFixed(2);
+            var progressElement = document.querySelector('.progress-facebook');
+            var percentageElement = document.querySelector('.percentage-facebook');
+            progressElement.style.width = `${percentage}%`;
+            percentageElement.innerText = `${percentage}%`;
+        }, 3000);
+
+
+        //         /* Linkedin */
+
+
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>
